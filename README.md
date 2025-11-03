@@ -21,6 +21,31 @@ an indev ubg project made in astro because:
 - [ ] vc
 - [ ] lots more social stuff lol
 
+## deployment
+you can deploy this to netlify out-of-the-box, but to deploy to vercel, you need to install the `@astrojs/vercel` package and switch the adapter in `astro.config.mjs`. for local deployment, take a look at the instructions below:
+
+#### step 1: clone
+run the following command in your terminal (make sure you have git before you do this)
+```bash
+git clone https://github.com/x8rr/breeze.git
+```
+
+#### step 2: install
+now open up that folder and run the following command. keep in mind you can use your package manager of choice. i use bun
+```bash
+bun i
+```
+
+#### step 3: start the server
+finally, you can start your server by doing one of the following
+```bash
+astro dev # use astro to start a dev server
+vite # use vite to start a server
+bun start # use your package manager to start a server
+```
+
+thats it really, super easy deployment.
+
 ## if you fork...
 please star the project :P
 
