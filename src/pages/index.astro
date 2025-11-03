@@ -39,4 +39,8 @@ import Layout from "../layouts/Layout.astro";
       rSearch(homesearch?.value.trim());
     }
   });
+
+  document.addEventListener("keydown", e => {
+    homesearch?.focus()
+  })
 </script>
