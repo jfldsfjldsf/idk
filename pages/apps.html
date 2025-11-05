@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <title>breeze.</title>
+    <link rel="preconnect" href="https://fdn.fontcdn.ir">
+    <link rel="preconnect" href="https://v1.fontapi.ir">
+    <link href="https://v1.fontapi.ir/css/SFProDisplay" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/uv/uv.bundle.js"></script>
+    <script src="/uv/uv.config.js"></script>
+    <script src="/baremux/index.js"></script>
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/fa/css/all-pro.css">
+</head>
+
+<body>
+    <br><br><br><br><br>
+    <input type="text" placeholder="search through the apps..." id="apps-search" class="h-fit p-2 px-5 w-2/6 bg-slate-900 border border-white/20 absolute left-1/2 translate-x-[-50%] rounded-full transition-all focus:ring-2 focus:ring-slate-400 focus:outline-none focus:bg-slate-800">
+    <br><br><br><br>
+    <div class="apps-container flex flex-wrap w-7/8 fixed left-1/2 translate-x-[-50%] justify-center">
+        <div class="example-app bg-gray-800 rounded-3xl">
+            h
+        </div>
+    </div>
+
+    <script>
+        let res
+        let data
+
+        const aCont = document.querySelector(".apps-container")
+
+        async function gj() {
+            res = await fetch("/assets/json/apps.json");
+            data = await res.json()
+        }
+    </script>
+</body>
+
+</html>
