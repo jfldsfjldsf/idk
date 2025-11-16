@@ -35,7 +35,7 @@
     <script>
         async function signUp(u, p) {
             const { data, error } = await window.supabase.auth.signUp({
-                email: `${u}@breezeacounts.lol`,
+                email: `${u}@breezeaccounts.lol`,
                 password: p,
             });
             if (error) throw error;
@@ -44,7 +44,7 @@
 
         async function signIn(u, p) {
             const { data, error } = await window.supabase.auth.signInWithPassword({
-                email: `${u}@breezeacounts.lol`,
+                email: `${u}@breezeaccounts.lol`,
                 password: p,
             });
             if (error) throw error;
@@ -65,59 +65,7 @@
         newTab()
     </script>
     <script>
-        async function registerSW() {
-            if ("serviceWorker" in navigator) {
-                await navigator.serviceWorker.register("/uv/sw.js").then(() => {
-                    console.log(
-                        "%cbreeze." + "%c UV sw registered!",
-                        "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
-                        "color: white; background: transparent; border-radius: 0px; padding: 0px;"
-                    );
-                    setTimeout(() => {
-                        showToast("success", "Ultraviolet worker initialized!", "fas fa-check-circle")
-                        console.log("shown toast")
-                    }, 1000)
-                }).catch(e => {
-                    console.log("Error registering service worker (UV): " + e)
-                    showToast("error", "Failed to register service worker", "fas fa-times-circle")
-                });
-
-                await navigator.serviceWorker.register("/sw.js").then(() => {
-                    console.log(
-                        "%cbreeze." + "%c SJ sw registered!",
-                        "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
-                        "color: white; background: transparent; border-radius: 0px; padding: 0px;"
-                    );
-                    setTimeout(() => {
-                        showToast("success", "Scramjet worker initialized", "fas fa-check-circle")
-                        console.log("shown toast")
-                    }, 1000)
-                }).catch(e => {
-                    console.log("Error registering service worker (SJ): " + e)
-                    showToast("error", "Failed to register service worker", "fas fa-times-circle")
-                });
-            }
-        }
-
-        window.addEventListener("load", () => {
-            registerSW();
-            lucide.createIcons();
-        });
-
-        const contentFrame = document.getElementById('contentFrame');
-        const homeContent = document.getElementById('homeContent');
-        const navLinks = document.querySelectorAll('nav a[data-page]');
-
-        function navTo(l) {
-            if (l === "home") {
-                contentFrame.style.display = "none"
-                homeContent.style.display = "block"
-            } else {
-                homeContent.style.display = "none"
-                contentFrame.style.display = "block"
-                contentFrame.src = `/pages/${l}.html`
-            }
-        }
+        
 
         function toast(icon, msg) {
             const container = document.querySelector(".toast-container")
@@ -243,9 +191,10 @@
 
         async function handleSignOut() {
             await signOut();
-            showToast("success", "Signed out", "fas fa-check-circle");
+            showToast("success", "Signed out. Reloading...", "fas fa-check-circle");
             document.querySelector("#auth-section i").classList.replace("fa-user-check", "fa-user");
             document.getElementById("signout-btn").style.display = "none";
+            window.location.reload()
             toggleAuth();
         }
 
@@ -616,7 +565,7 @@
                 <div class="settings-list">
                     <div class="setting-item">
                         <div>
-                            <h3>Username</h3>
+                            <h3>Display Name</h3>
                             <p>Change your display name</p>
                         </div>
                         <button onclick="changeUsername()">Edit</button>
@@ -627,6 +576,13 @@
                             <p>Update your password</p>
                         </div>
                         <button onclick="changePassword()">Change</button>
+                    </div>
+                    <div class="setting-item account-danger">
+                        <div>
+                            <h3>Log out</h3>
+                            <p>Sign out of your account. You can always log back in later</p>
+                        </div>
+                        <button onclick="handleSignOut()">Log Out</button>
                     </div>
                 </div>
             </div>
@@ -687,7 +643,61 @@
             })
         }
     </script>
+    <script>
+        async function registerSW() {
+                if ("serviceWorker" in navigator) {
+                    await navigator.serviceWorker.register("/uv/sw.js").then(() => {
+                        console.log(
+                            "%cbreeze." + "%c UV sw registered!",
+                            "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
+                            "color: white; background: transparent; border-radius: 0px; padding: 0px;"
+                        );
+                        setTimeout(() => {
+                            showToast("success", "Ultraviolet worker initialized!", "fas fa-check-circle")
+                            console.log("shown toast")
+                        }, 1000)
+                    }).catch(e => {
+                        console.log("Error registering service worker (UV): " + e)
+                        showToast("error", "Failed to register service worker", "fas fa-times-circle")
+                    });
 
+                    await navigator.serviceWorker.register("/sw.js").then(() => {
+                        console.log(
+                            "%cbreeze." + "%c SJ sw registered!",
+                            "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
+                            "color: white; background: transparent; border-radius: 0px; padding: 0px;"
+                        );
+                        setTimeout(() => {
+                            showToast("success", "Scramjet worker initialized", "fas fa-check-circle")
+                            console.log("shown toast")
+                        }, 1000)
+                    }).catch(e => {
+                        console.log("Error registering service worker (SJ): " + e)
+                        showToast("error", "Failed to register service worker", "fas fa-times-circle")
+                    });
+                }
+            }
+
+            window.addEventListener("load", () => {
+                registerSW();
+                lucide.createIcons();
+            });
+
+            const contentFrame = document.getElementById('contentFrame');
+            const homeContent = document.getElementById('homeContent');
+            const navLinks = document.querySelectorAll('nav a[data-page]');
+
+            function navTo(l) {
+                if (l === "home") {
+                    contentFrame.style.display = "none"
+                    homeContent.style.display = "block"
+                } else {
+                    homeContent.style.display = "none"
+                    contentFrame.style.display = "block"
+                    contentFrame.src = `/pages/${l}.html`
+                }
+            }
+    </script>
     <script>
         let aTab = 0
         let tabCounter = 1
