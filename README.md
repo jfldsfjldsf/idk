@@ -1,3 +1,6 @@
+> [!CAUTION]
+> i am aware of the authentication bug regarding profile functions after token refreshes, and i am working to fix this bug.
+
 # breeze.
 an indev ubg project, made to be clean and easy to use
 
