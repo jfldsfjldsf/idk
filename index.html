@@ -59,6 +59,11 @@
                     <i class="fas fa-clapperboard"></i>
                 </a>
             </li>
+            <li>
+                <a onclick="togglePartners()" href="#" data-page="movies">
+                    <i class="fas fa-handshake-simple"></i>
+                </a>
+            </li>
             <!--
             <li>
                 <a onclick="toggleChat()" href="#" data-page="social">
@@ -147,9 +152,13 @@
                     <div class="store-selector">
                         <div class="store-selected"></div>
                         <div class="store-options">
-                            
+
                         </div>
                     </div>
+
+                    <h2>Download Games</h2>
+                    <p>Download all game stores.</p>
+                    <button style="margin-left: 0;" onclick="toggleDownloadGames()">Download</button>
                 </div>
 
                 <div id="settings-cloaking" class="settings-page">
@@ -188,14 +197,17 @@
                     <h2>Credits</h2>
                     <p>
                         <b style="font-weight: 500;">GN Math</b> - all games <br>
-                        <b style="font-weight: 500;"><a href="https://waves.lat" target="_blank">Waves</a></b> - custom dropdown, styling
+                        <b style="font-weight: 500;"><a href="https://waves.lat" target="_blank">Waves</a></b> - custom
+                        dropdown, styling
                         inspiration <br>
                         <b style="font-weight: 500;">TitaniumNetwork</b> - Ultraviolet <br>
                         <b style="font-weight: 500;">Scramjet</b> - Libcurl and Scramjet <br>
-                        <b style="font-weight: 500;"><a href="https://github.com/ambr0sial/nova" target="_blank">Nova</a></b> - movies and TV
+                        <b style="font-weight: 500;"><a href="https://github.com/ambr0sial/nova"
+                                target="_blank">Nova</a></b> - movies and TV
                         source <br>
                         <b style="font-weight: 500;">RHW, Terbium, and Anura</b> - Wisp servers <br>
-                        <b style="font-weight: 500;"><a href="https://techno.pics/" target="_blank">technonyte</a></b> - Emotional support <br>
+                        <b style="font-weight: 500;"><a href="https://techno.pics/" target="_blank">technonyte</a></b> -
+                        Emotional support <br>
                     </p>
 
                     <br>
@@ -263,6 +275,22 @@
             <br>
         </div>
         <br>
+    </div> 
+
+    <div class="download-wrapper settings-hidden">
+        <div style="text-align: center;">
+            <br>
+            <h1 style="font-size: 23px; margin-bottom: 10px;">Download Games</h1>
+        </div>
+        <div style="text-align: center;">
+            <a href="https://drive.google.com/file/d/1jenQFXTxrgbNqfLYzH7ckVEC_hskECl1/view?usp=sharing" target="_blank">
+                <button>Google Drive 1</button>
+            </a>
+        </div>
+        <br>
+        <p style="opacity: .5; font-size: 14px; font-style: italic; text-align: center; ">more coming before gta 6 twin
+            <br> :broken-heart: :wilted-rose: :low-battery:
+        </p>
     </div>
 
     <div class="games-wrapper settings-hidden">
@@ -275,6 +303,28 @@
             <br>
         </div>
         <br>
+    </div>
+
+    <div class="partners-wrapper settings-hidden">
+        <br>
+        <h1 style="text-align: center; font-size: 35px; color: var(--bright-text); font-weight: 500;">Partners</h1>
+        <br>
+        <p align="center">No partners yet.</p>
+        <div
+            class="partner-container h-[83%] overflow-y-scroll w-[475px] flex flex-wrap w-7/8 absolute left-1/2 translate-x-[-50%] justify-center">
+            <!--
+            <a href="https://prism.onl/" target="_blank">
+                <div class="app">
+                    <div class="bg-img" style="background: url('/assets/img/partners/prism.png');"></div>
+                    <div class="app-title-cont">
+                        <h2 class="app-title-h2">Prism</h2>
+                </div>
+            </a>
+            -->
+        </div>
+        <br>
+    </div>
+    <br>
     </div>
 
     <script src="/assets/js/dropdown.js"></script>
@@ -293,6 +343,10 @@
             res = await fetch(`/assets/json/${file}.json`);
             data = await res.json()
         }
+
+        // welcome to my super bad json loader
+        // time wasted trying to understand this craphole:
+        // 1 hour(s)
 
         function load(file, type, functionName, toRun, additions) {
             gj(file).then(() => {
@@ -449,6 +503,8 @@
 
         const appsHolder = document.querySelector(".apps-wrapper")
         const gamesHolder = document.querySelector(".games-wrapper")
+        const downloadHolder = document.querySelector(".download-wrapper")
+        const partnerHolder = document.querySelector(".partners-wrapper")
 
         const general = document.querySelector("#settings-general")
         const cloaking = document.querySelector("#settings-cloaking")
@@ -481,10 +537,17 @@
                     toggleApps()
                 } else if (gamesHolder.classList.contains("settings-shown")) {
                     toggleGames()
+                } else if (partnerHolder.classList.contains("settings-shown")) {
+                    togglePartners()
+                } else if (downloadHolder.classList.contains("settings-shown")) {
+                    toggleDownloadGames()
                 }
                 const newBlurOverlay = document.createElement("div")
                 newBlurOverlay.classList.add("blurOverlay")
                 document.body.appendChild(newBlurOverlay)
+                newBlurOverlay.addEventListener("click", () => {
+                    toggleSettings()
+                })
                 settingsHolder.classList.remove("settings-hidden")
                 settingsHolder.classList.add("settings-shown")
             } else {
@@ -500,10 +563,17 @@
                     toggleSettings()
                 } else if (gamesHolder.classList.contains("settings-shown")) {
                     toggleGames()
+                } else if (partnerHolder.classList.contains("settings-shown")) {
+                    togglePartners()
+                } else if (downloadHolder.classList.contains("settings-shown")) {
+                    toggleDownloadGames()
                 }
                 const newBlurOverlay = document.createElement("div")
                 newBlurOverlay.classList.add("blurOverlay")
                 document.body.appendChild(newBlurOverlay)
+                newBlurOverlay.addEventListener("click", () => {
+                    toggleApps()
+                })
                 appsHolder.classList.remove("settings-hidden")
                 appsHolder.classList.add("settings-shown")
                 console.log("Apps toggled.")
@@ -514,21 +584,86 @@
                 newBlurOverlay.remove()
             }
         }
-        function toggleGames() {
-            if (gamesHolder.classList.contains("settings-hidden")) {
-                if (settingsHolder.classList.contains("settings-shown")) {
-                    toggleSettings()
-                } else if (appsHolder.classList.contains("settings-shown")) {
+
+        function toggleDownloadGames() {
+            if (downloadHolder.classList.contains("settings-hidden")) {
+                if (appsHolder.classList.contains("settings-shown")) {
                     toggleApps()
+                } else if (gamesHolder.classList.contains("settings-shown")) {
+                    toggleGames()
+                } else if (partnerHolder.classList.contains("settings-shown")) {
+                    togglePartners()
+                } else if (settingsHolder.classList.contains("settings-shown")) {
+                    toggleSettings()
                 }
                 const newBlurOverlay = document.createElement("div")
                 newBlurOverlay.classList.add("blurOverlay")
                 document.body.appendChild(newBlurOverlay)
+                newBlurOverlay.addEventListener("click", () => {
+                    toggleDownloadGames()
+                })
+                downloadHolder.classList.remove("settings-hidden")
+                downloadHolder.classList.add("settings-shown")
+                console.log("Apps toggled.")
+            } else {
+                downloadHolder.classList.remove("settings-shown")
+                downloadHolder.classList.add("settings-hidden")
+                const newBlurOverlay = document.querySelector(".blurOverlay")
+                newBlurOverlay.remove()
+            }
+        }
+
+        function toggleGames() {
+            if (gamesHolder.classList.contains("settings-hidden")) {
+                if (appsHolder.classList.contains("settings-shown")) {
+                    toggleApps()
+                } else if (settingsHolder.classList.contains("settings-shown")) {
+                    toggleSettings()
+                } else if (partnerHolder.classList.contains("settings-shown")) {
+                    togglePartners()
+                } else if (downloadHolder.classList.contains("settings-shown")) {
+                    toggleDownloadGames()
+                }
+                const newBlurOverlay = document.createElement("div")
+                newBlurOverlay.classList.add("blurOverlay")
+                document.body.appendChild(newBlurOverlay)
+                newBlurOverlay.addEventListener("click", () => {
+                    console.log("clicked")
+                    toggleGames()
+                })
                 gamesHolder.classList.remove("settings-hidden")
                 gamesHolder.classList.add("settings-shown")
             } else {
                 gamesHolder.classList.remove("settings-shown")
                 gamesHolder.classList.add("settings-hidden")
+                const newBlurOverlay = document.querySelector(".blurOverlay")
+                newBlurOverlay.remove()
+            }
+        }
+
+        function togglePartners() {
+            if (partnerHolder.classList.contains("settings-hidden")) {
+                if (appsHolder.classList.contains("settings-shown")) {
+                    toggleApps()
+                } else if (settingsHolder.classList.contains("settings-shown")) {
+                    toggleSettings()
+                } else if (gamesHolder.classList.contains("settings-shown")) {
+                    toggleGames()
+                } else if (downloadHolder.classList.contains("settings-shown")) {
+                    toggleDownloadGames()
+                }
+                const newBlurOverlay = document.createElement("div")
+                newBlurOverlay.classList.add("blurOverlay")
+                document.body.appendChild(newBlurOverlay)
+                newBlurOverlay.addEventListener("click", () => {
+                    console.log("clicked")
+                    togglePartners()
+                })
+                partnerHolder.classList.remove("settings-hidden")
+                partnerHolder.classList.add("settings-shown")
+            } else {
+                partnerHolder.classList.remove("settings-shown")
+                partnerHolder.classList.add("settings-hidden")
                 const newBlurOverlay = document.querySelector(".blurOverlay")
                 newBlurOverlay.remove()
             }
