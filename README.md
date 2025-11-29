@@ -5,6 +5,7 @@
 <p align="center">
   an indev ubg project made to be clean and easy to use. with over 500 games from 2 different stores, 40 apps, a blazing fast browser, extensive customization, and more, this is easily one of the best websites for school.
 </p>
+THIS IS A FORK FOR ME TO EXPERIMIENT ADS WITH PERMISSSION OF THE RIGHT FULL OWNER.
 
 <hr>
 
