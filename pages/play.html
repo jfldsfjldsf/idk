@@ -327,7 +327,7 @@
             }, 500)
             setTimeout(() => {
                 overlayNotice.style.opacity = 0
-            }, 1000)
+            }, 2000)
             window.addEventListener("message", (ev) => {
                 if (ev.data.type === "alt-g") {
                     if (overlay.classList.contains("active")) {
@@ -363,6 +363,8 @@
             const now = new Date();
             return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
         }
+
+        setInterval(getOSTime(), 60000)
 
         document.getElementById("currentTime").textContent = getOSTime()
 
