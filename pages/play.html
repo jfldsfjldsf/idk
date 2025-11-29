@@ -327,7 +327,7 @@
             }, 500)
             setTimeout(() => {
                 overlayNotice.style.opacity = 0
-            }, 2000)
+            }, 3000)
             window.addEventListener("message", (ev) => {
                 if (ev.data.type === "alt-g") {
                     if (overlay.classList.contains("active")) {
@@ -431,7 +431,7 @@
             let elapsed = 0
 
             function format(ms) {
-                let totalSeconds = Math.floor(ms / 280000)
+                let totalSeconds = Math.floor(ms / 60000)
                 let hours = Math.floor(totalSeconds / 3600)
                 let minutes = Math.floor((totalSeconds % 3600) / 60)
                 let seconds = totalSeconds % 60
