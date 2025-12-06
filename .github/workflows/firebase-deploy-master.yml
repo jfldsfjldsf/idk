@@ -1,1 +1,36 @@
+name: Deploy to Firebase Hosting (Master)
 
+on:
+  push:
+    # Trigger deployment only on pushes to the 'master' branch
+    branches:
+      - master
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # IMPORTANT: UNCOMMENT and adjust the build step if needed
+      # - name: Install Dependencies and Build
+      #   run: |
+      #     npm ci
+      #     npm run build 
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          # --- KEY CHANGE: Using your secret name: FIREBASE ---
+          firebaseServiceAccount: ${{ secrets.FIREBASE }}
+          
+          # Your specified Project ID
+          projectId: cherrion-top 
+          channelId: live
