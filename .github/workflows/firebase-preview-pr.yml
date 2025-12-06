@@ -1,0 +1,34 @@
+name: Deploy to Firebase Preview Channel
+
+on:
+  pull_request:
+    branches:
+      - master # Triggers when a PR targets the master branch
+
+jobs:
+  build_and_preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      # IMPORTANT: UNCOMMENT and adjust the build step if needed
+      # - name: Install Dependencies and Build
+      #   run: |
+      #     npm ci
+      #     npm run build 
+
+      - name: Deploy to Firebase Preview
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }} 
+          # --- KEY CHANGE: Using your secret name: FIREBASE ---
+          firebaseServiceAccount: ${{ secrets.FIREBASE }}
+          
+          # Your specified Project ID
+          projectId: cherrion-top
