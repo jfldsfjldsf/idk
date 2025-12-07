@@ -5,12 +5,16 @@ const appSettings = {
   decoy: localStorage.getItem("decoy") || "None",
   wisp: localStorage.getItem("cherri_wispUrlSelected") || "rhw",
   theme: localStorage.getItem("cherri_theme") || "default",
-  store: localStorage.getItem("cherri_gameStore") || "Classplay"
+  store: localStorage.getItem("cherri_gameStore") || "Classplay",
 };
 
 const searchEngineSelector = document.querySelector(".search-engine-selector");
-const searchEngineSelected = searchEngineSelector.querySelector(".search-engine-selected");
-const searchEngineOptions = searchEngineSelector.querySelector(".search-engine-options");
+const searchEngineSelected = searchEngineSelector.querySelector(
+  ".search-engine-selected"
+);
+const searchEngineOptions = searchEngineSelector.querySelector(
+  ".search-engine-options"
+);
 
 const decoySelector = document.querySelector(".decoy-selector");
 const decoySelected = decoySelector.querySelector(".decoy-selected");
@@ -38,7 +42,7 @@ const decoyPresets = {
     icon: "https://www.google.com/favicon.ico",
   },
   "Google Docs": {
-    title: "Google Docs",
+    title: "Untitled document - Google Docs",
     icon: "https://ssl.gstatic.com/docs/documents/images/kix-favicon-2023q4.ico",
   },
   Youtube: {
@@ -46,8 +50,36 @@ const decoyPresets = {
     icon: "https://www.youtube.com/s/desktop/014dbbed/img/favicon_32x32.png",
   },
   "Google Drive": {
-    title: "Google Drive",
+    title: "My Drive - Google Drive",
     icon: "https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png",
+  },
+  "Khan Acadamy": {
+    title: "Khan Academy | Free Online Courses",
+    icon: "https://www.khanacademy.org/favicon.ico",
+  },
+  Canvas: {
+    title: "Dashboard | Canvas",
+    icon: "https://community.canvaslms.com/favicon.ico",
+  },
+  "Google Classroom": {
+    title: "Classroom",
+    icon: "https://ssl.gstatic.com/classroom/favicon.png",
+  },
+  "Delta Math": {
+    title: "Delta Math - Assignment",
+    icon: "https://www.google.com/s2/favicons?domain=deltamath.com&sz=256",
+  },
+  Microsoft: {
+    title: "Microsoft 365",
+    icon: "https://www.microsoft.com/favicon.ico",
+  },
+  Scratch: {
+    title: "Scratch - Imagine, Program, Share",
+    icon: "https://scratch.mit.edu/favicon.ico",
+  },
+  Billibilli: {
+    title: "Bilibili - Video Sharing Platform",
+    icon: "https://www.bilibili.com/favicon.ico",
   },
   Schoology: {
     title: "Home | Schoology",
@@ -96,14 +128,27 @@ const defaultWispUrl = `${
 }://${window.location.host}/w/`;
 const allBackendOptions = ["Ultraviolet", "Scramjet"];
 const allTransportOptions = ["Epoxy", "Libcurl"];
-const allSearchEngineOptions = ["DuckDuckGo", "Google", "Bing", "Startpage"];
+const allSearchEngineOptions = [
+  "DuckDuckGo",
+  "Brave",
+  "Qwant",
+  "Google",
+  "Bing",
+  "Startpage",
+];
 const allDecoyOptions = [
   "None",
   "Google",
   "Google Docs",
   "Youtube",
   "Google Drive",
-  "Schoology",
+  "Khan Acadamy",
+  "Canvas",
+  "Google Classroom",
+  "Delta Math",
+  "Microsoft",
+  "Scratch",
+  "Billibilli",
 ];
 
 const wispPresets = {
@@ -202,10 +247,7 @@ const allThemeOptions = [
   "violet",
 ];
 
-const allStoreOptions = [
-  "Classplay",
-  "GN-Math",
-];
+const allStoreOptions = ["Classplay", "GN-Math"];
 
 function createSelector(
   selectorType,
@@ -265,20 +307,28 @@ function createSelector(
 }
 
 function applyDecoy(s) {
-  const selected = decoyPresets[s]
-  let favicon = document.querySelector("link[rel*='icon']")
+  const selected = decoyPresets[s];
+  let favicon = document.querySelector("link[rel*='icon']");
 
   if (s === "None" || !selected) {
-    console.log("Stayed as " + favicon.href + " " + document.title + " and " + s + " was selected");
-    document.title = "cherri"
-    favicon.href = "/assets/img/fav.png"
-    return
+    console.log(
+      "Stayed as " +
+        favicon.href +
+        " " +
+        document.title +
+        " and " +
+        s +
+        " was selected"
+    );
+    document.title = "cherri";
+    favicon.href = "/assets/img/fav.png";
+    return;
   } else {
-    document.title = selected.title
-    favicon.href = selected.icon
-    console.log("Set to " + favicon.href + " " + document.title)
+    document.title = selected.title;
+    favicon.href = selected.icon;
+    console.log("Set to " + favicon.href + " " + document.title);
   }
-} 
+}
 
 createSelector(
   "search-engine",
@@ -346,8 +396,8 @@ createSelector(
   "Successfully updated game library!"
 );
 
-document.addEventListener("decoyUpdated", e => applyDecoy(e.detail))
-document.addEventListener("themeUpdated", e => {
+document.addEventListener("decoyUpdated", (e) => applyDecoy(e.detail));
+document.addEventListener("themeUpdated", (e) => {
   const link = document.getElementById("css-theme-link");
   const theme = e.detail ?? "default";
 
@@ -356,14 +406,14 @@ document.addEventListener("themeUpdated", e => {
   } else {
     link.href = "/assets/css/colors.css";
   }
-})
+});
 document.addEventListener("wispUpdated", (e) => {
-  const wisp = wispPresets[e.detail]
+  const wisp = wispPresets[e.detail];
 
-  localStorage.setItem("cherri_wispUrl", wisp.url)
-  console.log(wisp.url)
+  localStorage.setItem("cherri_wispUrl", wisp.url);
+  console.log(wisp.url);
 });
 window.addEventListener("load", () => {
   applyDecoy(localStorage.getItem("decoy"));
-  console.log("Cloaked as " + localStorage.getItem("decoy"))
-})
+  console.log("Cloaked as " + localStorage.getItem("decoy"));
+});

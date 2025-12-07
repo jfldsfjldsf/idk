@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="/assets/js/t.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
-    <script src="/sj/scramjet.all.js"></script>
+    <script src="/homework/math.all.js"></script>
     <link rel="stylesheet" href="/styles/index.css">
     <link rel="stylesheet" href="/assets/css/colors.css" id="css-theme-link">
     <link rel="stylesheet" href="/fa/css/all.css">
@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/fa/css/all-pro.css">
     <link rel="stylesheet" href="/assets/css/t.css">
     <link rel="stylesheet" href="/assets/css/dropdown.css">
+    <script src="/assets/js/cursor.js" defer></script>
     <script src="/assets/js/colors.js"></script>
     <script src="/assets/js/splash.js" defer></script>
     <script src="/assets/js/browserfunctions.js"></script>
@@ -50,10 +51,14 @@
 </head>
 
 <body>
+    <button id="gohomeblock" onclick="navTo('home?launch=1')">
+        <i class="ri-home-4-line"></i>
+    </button>
     <nav>
         <ul>
             <li style="width: 40px;">
-                <a onclick="navTo('home')" style="margin-top: 7.5px; margin-left: 10px;" href="#" data-page="home">
+                <a onclick="navTo('home?launch=1')" style="margin-top: 7.5px; margin-left: 10px;" href="#"
+                    data-page="home">
                     <div class="hcontainer">
                         <img src="/assets/img/fav.png" style="height: 24px; margin-top: -1px; margin-right: -0px;"
                             alt="">
@@ -80,6 +85,17 @@
                 <a onclick="navTo('vms'); showToast('success', 'VMs are still in beta! Report bugs on the repo/Discord.', 'fas fa-exclamation-triangle')"
                     href="#" data-page="vms">
                     <i class="ri-computer-line"></i>
+                </a>
+            </li>
+            <li>
+                <a onclick="navTo('assistant'); showToast('success', 'AI is in beta! Report bugs on the Discord/Repo', 'fas fa-exclamation-triangle')"
+                    href="#" data-page="ai">
+                    <i class="ri-robot-2-line"></i>
+                </a>
+            </li>
+            <li>
+                <a onclick="navTo('chatrooms');" href="#" data-page="chatrooms">
+                    <i class="ri-chat-1-line"></i>
                 </a>
             </li>
             <li class="divider"></li>
@@ -142,6 +158,8 @@
     <div class="toast-container"></div>
 
     <iframe id="contentFrame"></iframe>
+
+    <span class="online-users"><b id="user-count">0</b> users currently online</span>
 
     <div class="settings-container settings-hidden">
         <div class="container">
@@ -385,17 +403,20 @@
                 <div id="settings-info" class="settings-page">
                     <h2>Credits</h2>
                     <p>
-                        <b style="font-weight: 500;">GN Math</b> - all games <br>
-                        <b style="font-weight: 500;"><a href="https://waves.lat" target="_blank">Waves</a></b> - custom
+                        <b style="font-weight: 600;">GN Math</b> - all games <br>
+                        <b style="font-weight: 600;"><a href="https://waves.lat" target="_blank">Waves</a></b> - custom
                         dropdown, styling
                         inspiration <br>
-                        <b style="font-weight: 500;">TitaniumNetwork</b> - Ultraviolet <br>
-                        <b style="font-weight: 500;">Scramjet</b> - Libcurl and Scramjet <br>
-                        <b style="font-weight: 500;"><a href="https://github.com/ambr0sial/nova"
+                        <b style="font-weight: 600;">TitaniumNetwork</b> - Ultraviolet <br>
+                        <b style="font-weight: 600;">Mercury Workshop</b> - Libcurl and Scramjet <br>
+                        <b style="font-weight: 600;"><a href="https://github.com/ambr0sial/nova"
                                 target="_blank">Nova</a></b> - movies and TV
                         source <br>
-                        <b style="font-weight: 500;">RHW, Terbium, and Anura</b> - Wisp servers <br>
-                        <b style="font-weight: 500;"><a href="https://techno.pics/" target="_blank">technonyte</a></b> -
+                        <b style="font-weight: 600;"><a href="https://zxs.one" target="_blank">ZXS</a></b> - Custom
+                        cursor <br>
+                        <b style="font-weight: 600;">RHW, Terbium, and Anura</b> - Wisp servers <br>
+                        <b style="font-weight: 600;">DevEchoX2</b> - ArrowChat <br>
+                        <b style="font-weight: 600;"><a href="https://techno.pics/" target="_blank">technonyte</a></b> -
                         Emotional support <br>
                     </p>
 
@@ -407,22 +428,23 @@
                 </div>
 
                 <div id="settings-updates" class="settings-page">
-                    <h2>What's New in Release 1.0.0</h2>
+                    <h2>What's New in Release 1.1.0</h2>
                     <p class="update-cont">
-                        For the first stable release, we did something big to the website. We completely overhauled how
-                        it looks! We hope you like the website, and report any suggestions in the Discord or on the
-                        repository. You can see some new features in the list below.
+                        This was actually an INSANELY big update! Check out the additions below.
                         <br><br>
-                        • Complete website design redo <br>
-                        • Multiple different bug fixes <br>
-                        • Disabed search before SW registration <br>
-                        • Google Classroom overlay before site load, to help with GoGuardian <br>
+                        • AI <br>
+                        • Chatrooms <br>
+                        • Custom Cursor (ZXS) <br>
+                        • Google Classroom cloaker thingy <br>
+                        • New cloaking presets <br>
+                        • Active User Count <br>
+                        • New VM Service <br>
                     </p>
                 </div>
             </div>
 
             <p class="version-tag">cherri <a href="https://github.com/x8rr/cherri/releases/latest"
-                    target="_blank">stable v1.0.0</a></p>
+                    target="_blank">stable v1.1.0</a></p>
         </div>
     </div>
 
@@ -468,6 +490,10 @@
     <!--<div id="particles-container"></div>-->
     <div id="vanta-fog-container"></div>
 
+    <div id="cursor-thank-you-zxs"
+        style="position: fixed; top: 0px; left: 0px; width: 16px; height: 16px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 70%, white 30%); pointer-events: none; z-index: 9999; transform: translate(748px, 592px); transition: width 0.15s, height 0.15s, opacity 0.15s; mix-blend-mode: difference; opacity: 0;">
+    </div>
+
     <div class="apps-wrapper settings-hidden">
         <input onkeyup="searchApps(this.value)" type="text" style="font-family: Arial;"
             placeholder="search through the apps..." id="apps-search"
@@ -509,8 +535,6 @@
         <br>
     </div>
 
-    <iframe src="/pages/classroom.html" id="classroomOverlay" class="shown" frameborder="0"></iframe>
-
     <div class="partners-wrapper settings-hidden">
         <br>
         <h1 style="text-align: center; font-size: 35px; color: var(--bright-text); font-weight: 500;">Partners</h1>
@@ -536,7 +560,7 @@
     <button id="reset-theme" onclick="resetTheme()">CLICK HERE TO RESET YOUR THEME!</button>
 
     <!-- site version -->
-    <cherriattr version="s1.0.0"></cherriattr>
+    <cherriattr version="s1.1.0"></cherriattr>
 
     <script src="/assets/js/dropdown.js"></script>
     <script>
@@ -683,9 +707,23 @@
         const navLinks = document.querySelectorAll('nav a[data-page]');
 
         function navTo(l) {
-            if (l === "home") {
+            if (l.includes("home")) {
                 contentFrame.remove();
+                document.querySelector("nav").style.display = "block"
+                setTimeout(() => {
+                    document.querySelector("nav").style.opacity = "1"
+                }, 3)
                 homeContent.style.display = "block";
+                document.querySelector("#gohomeblock").style.display = "none"
+            } else if (l === "vms") {
+                document.querySelector("nav").style.opacity = 0
+                setTimeout(() => {
+                    document.querySelector("nav").style.display = "none"
+                }, 350)
+                document.querySelector("#gohomeblock").style.display = "block"
+                homeContent.style.display = "none";
+                contentFrame.style.display = "block";
+                contentFrame.src = `/pages/${l}.html`
             } else {
                 if (!document.body.contains(contentFrame)) {
                     document.body.appendChild(contentFrame);
@@ -702,7 +740,6 @@
                 contentFrame.src = l.includes("/stores/") ? `/pages/${l}` : `/pages/${l}.html`;
             }
         }
-
     </script>
     <script>
         const inp = document.getElementById("searchbar")
@@ -905,7 +942,7 @@
 
             let url = input;
             if (!url.includes(".") || url.includes(" ")) {
-                url = "https://search.brave.com/search?q=" + url;
+                url = url;
             } else {
                 if (!url.startsWith("http://") && !url.startsWith("https://")) {
                     url = "https://" + url;
@@ -968,7 +1005,7 @@
                     lowlightColor: hexToNumber(cssVar("--bg-5")),
                     baseColor: hexToNumber(cssVar("--bg")),
                     blurFactor: 0.90,
-                    speed: 3.60
+                    speed: 1
                 })
                 showToast("success", "Vanta is now on!", "fas fa-check-circle")
             } else {
@@ -1068,15 +1105,6 @@
             openAB()
         }
 
-        window.addEventListener("DOMContentLoaded", () => {
-            setTimeout(() => {
-                document.getElementById("classroomOverlay").style.top = "110%"
-                setTimeout(() => {
-                    document.getElementById("classroomOverlay").classList.remove("shown")
-                }, 450)
-            }, 2500)
-        })
-
         const confirmLeaveOn = localStorage.getItem("cherri_confirmLeave") ?? "no"
         const confirmLeaveToggle = document.getElementById("confirm-leave-toggle")
 
@@ -1104,6 +1132,16 @@
                 e.returnValue = ""
             }
         })
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search)
+            if (!params.get("launch")) {
+                window.location.href = "/start.html"
+            }
+            if (params.get("page") && params.get("launch")) {
+                navTo(params.get("page"))
+            }
+        })
     </script>
     <script>
         const styles = getComputedStyle(document.documentElement)
@@ -1116,19 +1154,36 @@
             return parseInt(hex.replace("#", ""), 16)
         }
 
-        VANTA.FOG({
-            el: "#vanta-fog-container",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            highlightColor: hexToNumber(cssVar("--accent")),
-            midtoneColor: hexToNumber(cssVar("--bg-2")),
-            lowlightColor: hexToNumber(cssVar("--bg-5")),
-            baseColor: hexToNumber(cssVar("--bg")),
-            blurFactor: 0.90,
-            speed: 3.60
-        })
+        if (localStorage.getItem("cherri_particlesOn") === "yes") {
+            VANTA.FOG({
+                el: "#vanta-fog-container",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                highlightColor: hexToNumber(cssVar("--accent")),
+                midtoneColor: hexToNumber(cssVar("--bg-2")),
+                lowlightColor: hexToNumber(cssVar("--bg-5")),
+                baseColor: hexToNumber(cssVar("--bg")),
+                blurFactor: 0.90,
+                speed: 1
+            })
+        }
+
+        async function getActiveUsers() {
+            const endpoint = "https://api.x8r.dev/api/umami"
+            const res = await fetch(endpoint)
+            const data = await res.json()
+
+            console.log("CURRENT VISITORS:" + data.visitors)
+            document.getElementById("user-count").textContent = data.visitors
+        }
+
+        getActiveUsers()
+
+        setInterval(() => {
+            getActiveUsers()
+        }, 30000)
     </script>
 </body>

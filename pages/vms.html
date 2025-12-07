@@ -21,6 +21,7 @@
     <style>
         html {
             background: none;
+            overflow: hidden;
         }
 
         #particles-container {
@@ -84,10 +85,11 @@
 
         iframe {
             background: var(--bg);
-            height: 80vh;
-            border-radius: 25px;
-            border: 1px solid var(--border-4);
-            width: 90%;
+            height: 100vh;
+            border-radius: 0px;
+            border: 0px solid var(--border-4);
+            width: 100%;
+            cursor: none;
         }
 
         button.disabled {
@@ -114,14 +116,7 @@
     </style>
 
     <center>
-        <br><br><br><br>
-        <button disabled id="create-btn">New VM</button>
-        <button id="fullscreen-btn" disabled onclick="document.getElementById('vm-frame').requestFullscreen()">Fullscreen</button>
-        <p><span id="cooldown">No Cooldown</span></p>
-        <br><br>
-        <iframe src="" frameborder="0" id="vm-frame"></iframe>
-        <p class="atbottom"><i class="ri-lightbulb-fill"></i>&nbsp;Taking abnormally long to load? VMs might be under load. Try again later!</p>
-        <br><br>
+        <iframe src="/pages/embed.html?launch=https://browser.lol/create" frameborder="0"></iframe>
     </center>
 
     <script>
@@ -131,6 +126,10 @@
     </script>
 
     <script src="/assets/js/vm.js" defer></script>
+    <div id="cursor-thank-you-zxs"
+        style="position: fixed; top: 0px; left: 0px; width: 16px; height: 16px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 70%, white 30%); pointer-events: none; z-index: 9999; transform: translate(748px, 592px); transition: width 0.15s, height 0.15s, opacity 0.15s; mix-blend-mode: difference; opacity: 0;">
+    </div>
+    <script src="/assets/js/cursor.js"></script>
 </body>
 
 </html>
