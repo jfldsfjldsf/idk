@@ -150,6 +150,7 @@
             </svg>
         </div>
         <br><br>
+            <span class="online-users"><b id="user-count">0</b> users currently online</span>
     </div>
 
     <div class="toast-container fixed right-4 top-4 w-1/4">
@@ -159,7 +160,7 @@
 
     <iframe id="contentFrame"></iframe>
 
-    <span class="online-users"><b id="user-count">0</b> users currently online</span>
+
 
     <div class="settings-container settings-hidden">
         <div class="container">
@@ -1154,7 +1155,8 @@
             return parseInt(hex.replace("#", ""), 16)
         }
 
-        if (localStorage.getItem("cherri_particlesOn") === "yes") {
+        const useFog = localStorage.getItem("cherri_particlesOn") ?? "yes"
+        if (useFog === "yes") {
             VANTA.FOG({
                 el: "#vanta-fog-container",
                 mouseControls: true,
