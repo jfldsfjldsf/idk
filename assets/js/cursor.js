@@ -1,4 +1,11 @@
-(() => {
+const useCursor = localStorage.getItem("cherri_customCursor") ?? "yes";
+
+let animationId = null;
+let mouseMoveHandler = null;
+let messageHandler = null;
+let hideInterval = null;
+
+function cursor() {
   const cursor = document.createElement("div");
   cursor.style.position = "fixed";
   cursor.style.top = "0";
@@ -13,7 +20,7 @@
   cursor.style.transition =
     "width 0.15s ease, height 0.15s ease, opacity 0.15s ease, 0.0412s transform";
   cursor.style.mixBlendMode = "difference";
-  cursor.id = "zxs-custom-cursor";
+  cursor.id = "cursor-thank-you-zxs";
   document.body.appendChild(cursor);
 
   let cursorVisible = true;
@@ -27,9 +34,9 @@
     displayX += (mouseX - displayX) * 0.25;
     displayY += (mouseY - displayY) * 0.25;
     cursor.style.transform = `translate(${displayX - 8}px, ${displayY - 8}px)`;
-    requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animate);
   }
-  requestAnimationFrame(animate);
+  animate();
 
   function updateCursor(x, y) {
     mouseX = x;
@@ -38,11 +45,10 @@
     if (!cursorVisible) showCursor();
   }
 
-  window.addEventListener("mousemove", (e) =>
-    updateCursor(e.clientX, e.clientY)
-  );
+  mouseMoveHandler = (e) => updateCursor(e.clientX, e.clientY);
+  window.addEventListener("mousemove", mouseMoveHandler);
 
-  window.addEventListener("message", (e) => {
+  messageHandler = (e) => {
     const data = e.data;
     if (!data || typeof data !== "object") return;
 
@@ -59,13 +65,15 @@
 
     if (data.type === "cursorMove")
       updateCursor(data.x + offsetX, data.y + offsetY);
-  });
+  };
+  window.addEventListener("message", messageHandler);
 
   const hideCursorStyle = document.createElement("style");
   hideCursorStyle.textContent = `* { cursor: none !important; }`;
+  hideCursorStyle.id = "cursor-style-zxs";
   document.head.appendChild(hideCursorStyle);
 
-  setInterval(() => {
+  hideInterval = setInterval(() => {
     if (Date.now() - lastMove > 500 && cursorVisible) hideCursor();
   }, 250);
 
@@ -78,4 +86,31 @@
     cursor.style.opacity = "1";
     cursorVisible = true;
   }
-})();
+}
+
+function removeCursor() {
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+    animationId = null;
+  }
+  if (mouseMoveHandler) {
+    window.removeEventListener("mousemove", mouseMoveHandler);
+    mouseMoveHandler = null;
+  }
+  if (messageHandler) {
+    window.removeEventListener("message", messageHandler);
+    messageHandler = null;
+  }
+  if (hideInterval) {
+    clearInterval(hideInterval);
+    hideInterval = null;
+  }
+  const cursorEl = document.getElementById("cursor-thank-you-zxs");
+  const cursorStyle = document.getElementById("cursor-style-zxs");
+  if (cursorEl) cursorEl.style.opacity = "0";
+  if (cursorStyle) cursorStyle.remove();
+}
+
+if (useCursor === "yes") {
+  cursor();
+}

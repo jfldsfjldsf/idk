@@ -30,6 +30,13 @@
     <script src="/assets/js/lib/vanta.fog.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/eruda@3.4.3/eruda.min.js"></script>
     <script src="/assets/js/lib/particles.js"></script>
+    <script>
+        // why is there a comment here you may ask? well, i don't know. i just put it here. okay now go away this code is NOT interesting twin.
+        const params = new URLSearchParams(window.location.search)
+        if (!params.get("launch")) {
+            window.location.replace('/start.html');
+        }
+    </script>
     <meta name="title" content="Cherri">
     <meta name="description"
         content="A state of the art unblocked games website. Clean, customizable, and now in pink!">
@@ -145,12 +152,10 @@
             <i class="fas fa-search"></i>
             <input id="homesearch" disabled autocomplete="off" style="margin-right: -3%;" type="text"
                 placeholder="search not ready yet!" />
-            <svg viewBox="25 25 50 50" class="loading">
-                <circle r="20" cy="50" cx="50"></circle>
-            </svg>
+            <i style="margin-right: 1%; animation: rotationlmao .45s linear infinite forwards; transition: 0.2s;" class="fas fa-spinner-third"></i>
         </div>
         <br><br>
-            <span class="online-users"><b id="user-count">0</b> users currently online</span>
+        <span class="online-users"><b id="user-count">0</b> users currently online</span>
     </div>
 
     <div class="toast-container fixed right-4 top-4 w-1/4">
@@ -159,8 +164,6 @@
     <div class="toast-container"></div>
 
     <iframe id="contentFrame"></iframe>
-
-
 
     <div class="settings-container settings-hidden">
         <div class="container">
@@ -209,6 +212,38 @@
                     <!-- From Uiverse.io by Galahhad -->
                     <label class="switch">
                         <input id="pjs-toggle" checked="" onchange="updatePJS()" type="checkbox">
+                        <div class="slider">
+                            <div class="circle">
+                                <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path data-original="#000000" fill="currentColor"
+                                            d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
+                                        </path>
+                                    </g>
+                                </svg>
+                                <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 24 24" y="0" x="0" height="10" width="10"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path class="" data-original="#000000" fill="currentColor"
+                                            d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </label>
+                    <br>
+                    <br>
+                    <h2>Custom Cursor</h2>
+                    <p>Enable or disable the ZXS cursor, which could also improve performance.</p>
+                    <!-- From Uiverse.io by Galahhad -->
+                    <label class="switch">
+                        <input id="cursor-toggle" checked="" onchange="updateCur()" type="checkbox">
                         <div class="slider">
                             <div class="circle">
                                 <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
@@ -429,23 +464,18 @@
                 </div>
 
                 <div id="settings-updates" class="settings-page">
-                    <h2>What's New in Release 1.1.0</h2>
+                    <h2>What's New in Release 1.1.1</h2>
                     <p class="update-cont">
-                        This was actually an INSANELY big update! Check out the additions below.
+                        Tiny patch update.
                         <br><br>
-                        • AI <br>
-                        • Chatrooms <br>
-                        • Custom Cursor (ZXS) <br>
-                        • Google Classroom cloaker thingy <br>
-                        • New cloaking presets <br>
-                        • Active User Count <br>
-                        • New VM Service <br>
+                        • Custom cursor toggle <br>
+                        • Small bug fixes and optimizations <br>
                     </p>
                 </div>
             </div>
 
             <p class="version-tag">cherri <a href="https://github.com/x8rr/cherri/releases/latest"
-                    target="_blank">stable v1.1.0</a></p>
+                    target="_blank">stable v1.1.1</a></p>
         </div>
     </div>
 
@@ -561,7 +591,7 @@
     <button id="reset-theme" onclick="resetTheme()">CLICK HERE TO RESET YOUR THEME!</button>
 
     <!-- site version -->
-    <cherriattr version="s1.1.0"></cherriattr>
+    <cherriattr version="s1.1.1"></cherriattr>
 
     <script src="/assets/js/dropdown.js"></script>
     <script>
@@ -690,8 +720,8 @@
                 });
 
                 setTimeout(() => {
-                    document.querySelector(".loading").style.opacity = 0
-                    document.querySelector(".loading").style.pointerEvents = "none"
+                    document.querySelector(".fa-spinner-third").style.opacity = 0
+                    document.querySelector(".fa-spinner-third").style.pointerEvents = "none"
                     document.querySelector("#homesearch").disabled = false
                     document.querySelector("#homesearch").placeholder = "search anything..."
                 }, 1000)
@@ -1134,6 +1164,41 @@
             }
         })
 
+        const cursorOn = localStorage.getItem("cherri_customCursor") ?? "yes"
+        const cursorToggle = document.getElementById("cursor-toggle")
+
+        if (cursorOn === "yes") {
+            cursorToggle.checked = true
+        } else {
+            cursorToggle.checked = false
+        }
+
+        function updateCur() {
+            if (cursorToggle.checked) {
+                console.log("checked")
+                showToast("success", "Custom cursor is now on!", "fas fa-check-circle")
+                localStorage.setItem("cherri_customCursor", "yes")
+                cursor()
+            } else {
+                console.log("unchecked")
+                document.querySelectorAll("#cursor-thank-you-zxs").forEach(el => el.remove())
+                document.querySelectorAll("#cursor-style-zxs").forEach(el => el.remove())
+                if (animationId) cancelAnimationFrame(animationId)
+                if (mouseMoveHandler) window.removeEventListener("mousemove", mouseMoveHandler)
+                if (messageHandler) window.removeEventListener("message", messageHandler)
+                if (hideInterval) clearInterval(hideInterval)
+                localStorage.setItem("cherri_customCursor", "no")
+                showToast("success", "Custom cursor is now off!", "fas fa-check-circle")
+            }
+        }
+        
+        window.addEventListener("beforeunload", function (e) {
+            if (localStorage.getItem("cherri_confirmLeave") === "yes") {
+                e.preventDefault()
+                e.returnValue = ""
+            }
+        })
+
         window.addEventListener("DOMContentLoaded", () => {
             const params = new URLSearchParams(window.location.search)
             if (!params.get("launch")) {
@@ -1187,5 +1252,7 @@
         setInterval(() => {
             getActiveUsers()
         }, 30000)
+
+        
     </script>
 </body>

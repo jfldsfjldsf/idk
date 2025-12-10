@@ -344,3 +344,32 @@ async function launchEruda() {
     showToast("error", "Failed to inject Eruda", "fas fa-times-circle");
   }
 }
+
+async function fixProxy() {
+  await connection.setTransport("/libcurl/index.mjs", [{ websocket: wispUrl }]);
+
+  showToast("success", "Connection reset to Libcurl!", "fas fa-check-circle")
+  console.log(
+    "%c[SUCCESS]" + "%c Connection reset to Libcurl.",
+    "color: lime; font-weight: bold;",
+    "color: white; font-weight: normal;"
+  );
+
+  await navigator.serviceWorker.register("/sw.js")
+
+  showToast("success", "Service workers reregistered. (1/2)", "fas fa-check-circle");
+  console.log(
+    "%c[SUCCESS]" + "%c Service workers reregistered. (1/2)",
+    "color: lime; font-weight: bold;",
+    "color: white; font-weight: normal;"
+  );
+
+  await navigator.serviceWorker.register("/uv/sw.js")
+
+  showToast("success", "Service workers reregistered. (2/2)", "fas fa-check-circle");
+  console.log(
+    "%c[SUCCESS]" + "%c Service workers reregistered. (2/2)",
+    "color: lime; font-weight: bold;",
+    "color: white; font-weight: normal;"
+  );
+}
