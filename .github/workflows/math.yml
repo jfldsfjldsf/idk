@@ -1,0 +1,40 @@
+name: Deploy to Firebase Hosting (Live)
+
+on:
+  push:
+    # Trigger deployment only on pushes to the 'master' branch
+    branches:
+      - master
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # IMPORTANT: If your project uses a framework (React, Vue, etc.)
+      # that needs to be compiled, UNCOMMENT and adjust the 'run' command below.
+      # If you are using simple static HTML/CSS/JS, you can leave this commented out.
+      # - name: Install Dependencies and Build
+      #   run: |
+      #     npm ci
+      #     npm run build 
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          # --- Secret name: MATH ---
+          firebaseServiceAccount: ${{ secrets.MATH }}
+          
+          # --- Project ID: math-class-kap ---
+          projectId: math-class-kap 
+          
+          # Deploy to the live production channel
+          channelId: live
