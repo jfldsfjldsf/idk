@@ -1,0 +1,30 @@
+name: Deploy Static Site to Firebase Live
+
+on:
+  # Triggers when a push/merge targets the master branch
+  push:
+    branches:
+      - master 
+
+jobs:
+  deploy_live:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        # Gets the latest code from the master branch
+        uses: actions/checkout@v4
+        
+      # *** REMOVED: Node.js Setup and Build Step (Not needed for static site) ***
+
+      - name: Deploy Static Files to Firebase Hosting (Live)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          # Your Firebase Service Account Secret
+          firebaseServiceAccount: ${{ secrets.FIREBASE }}
+          
+          # Your specified Project ID
+          projectId: cherrion-top
+          
+          # OPTIONAL: If your firebase.json is not in the root directory, 
+          # specify the path to its containing directory.
+          # entryPoint: ./path/to/my/hosting/config
