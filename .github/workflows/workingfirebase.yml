@@ -1,30 +1,41 @@
-name: Deploy Static Site to Firebase Live
+name: Deploy to Firebase Hosting (Live)
 
 on:
-  # Triggers when a push/merge targets the master branch
   push:
+    # Trigger deployment only on pushes to the 'master' branch
     branches:
-      - master 
+      - master
 
 jobs:
-  deploy_live:
+  build_and_deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
-        # Gets the latest code from the master branch
         uses: actions/checkout@v4
-        
-      # *** REMOVED: Node.js Setup and Build Step (Not needed for static site) ***
 
-      - name: Deploy Static Files to Firebase Hosting (Live)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # NOTE: If your project uses a framework (React, Vue, etc.),
+      # you MUST UNCOMMENT and adjust the 'run' command below.
+      # If you are using simple static HTML/CSS/JS, leave this commented out.
+      # - name: Install Dependencies and Build
+      #   run: |
+      #     npm ci
+      #     npm run build 
+
+      - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          # Your Firebase Service Account Secret
-          firebaseServiceAccount: ${{ secrets.FIREBASE }}
+          # Use your secret name. I will use 'MATH' based on the last key you provided,
+          # but you should use the secret corresponding to 'cherrion-top' if it is different.
+          firebaseServiceAccount: ${{ secrets.MATH }} 
           
-          # Your specified Project ID
-          projectId: cherrion-top
+          # Your specified Project ID from the log
+          projectId: cherrion-top 
           
-          # OPTIONAL: If your firebase.json is not in the root directory, 
-          # specify the path to its containing directory.
-          # entryPoint: ./path/to/my/hosting/config
+          # FIX: Explicitly set channelId to solve the "channelID is currently required" error
+          channelId: live
