@@ -5,6 +5,8 @@ if (navigator.userAgent.includes("Firefox")) {
 	});
 }
 
+// s16 asked me to credit swium, so here you go. happy now?
+
 importScripts("/homework/math.all.js");
 
 const { ScramjetServiceWorker } = $scramjetLoadWorker();

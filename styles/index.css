@@ -1449,3 +1449,20 @@ span.online-count {
     transform: translateX(-50%);
     opacity: .45;
 }
+
+.wispInput {
+    height: 50px;
+    padding: 25px 15px;
+    color: var(--text);
+    background: color-mix(in srgb, var(--bg-2) 50%, transparent 50%);
+    border-radius: 15px;
+    text-align: left !important;
+    width: 300px;
+    margin-right: 5px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.wispInput:focus {
+    background: color-mix(in srgb, var(--bg-2) 90%, transparent 10%);
+}

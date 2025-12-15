@@ -20,10 +20,6 @@ const decoySelector = document.querySelector(".decoy-selector");
 const decoySelected = decoySelector.querySelector(".decoy-selected");
 const decoyOptions = decoySelector.querySelector(".decoy-options");
 
-const wispSelector = document.querySelector(".wisp-selector");
-const wispSelected = wispSelector.querySelector(".wisp-selected");
-const wispOptions = wispSelector.querySelector(".wisp-options");
-
 const backendSelector = document.querySelector(".backend-selector");
 const backendSelected = backendSelector.querySelector(".backend-selected");
 const backendOptions = backendSelector.querySelector(".backend-options");
@@ -153,15 +149,11 @@ const allDecoyOptions = [
 
 const wispPresets = {
   rhw: { url: "wss://wisp.rhw.one/" },
-  "Terbium": { url: "wss://webmath.help/wisp/" },
-  "Space": { url: "wss://gointospace.app/wisp" }
   
 };
 
 const allWispOptions = [
   "rhw",
-  "Terbium",
-  "Space"
 ];
 
 const allThemeOptions = [
@@ -286,17 +278,6 @@ createSelector(
   "decoy",
   "decoyUpdated",
   "Successfully updated cloak!"
-);
-
-createSelector(
-  "wisp",
-  wispSelected,
-  wispOptions,
-  allWispOptions,
-  appSettings.wisp,
-  "cherri_wispUrlSelected",
-  "wispUpdated",
-  "Successfully updated Wisp server!"
 );
 
 createSelector(

@@ -152,7 +152,8 @@
             <i class="fas fa-search"></i>
             <input id="homesearch" disabled autocomplete="off" style="margin-right: -3%;" type="text"
                 placeholder="search not ready yet!" />
-            <i style="margin-right: 1%; animation: rotationlmao .45s linear infinite forwards; transition: 0.2s;" class="fas fa-spinner-third"></i>
+            <i style="margin-right: 1%; animation: rotationlmao .45s linear infinite forwards; transition: 0.2s;"
+                class="fas fa-spinner-third"></i>
         </div>
         <br><br>
         <span class="online-users"><b id="user-count">0</b> users currently online</span>
@@ -405,15 +406,16 @@
                 </div>
 
                 <div id="settings-proxy" class="settings-page">
-                    <h2>Wisp Server</h2>
-                    <p>The server that all content will be transferred through. Make sure the Wisp server you are using
-                        is not blocked, or the proxy will not function.</p>
-                    <div class="wisp-selector">
-                        <div class="wisp-selected"></div>
-                        <div class="wisp-options">
-
-                        </div>
+                    <h2>Wisp</h2>
+                    <p>Websocket all content will be transferred through. Make sure the one in use is not blocked, or
+                        else it will not function! <b>The server you use must start with ws(s):// and end with a /.</b>
+                    </p>
+                    <div class="hcontainer">
+                        <input class="wispInput" type="text" placeholder="wss://domain.tld/wisp/">
+                        <button class="button"
+                            onclick="setWisp(document.querySelector('.wispInput').value)">Set</button>
                     </div>
+                    <br>
                     <h2>Backend</h2>
                     <p>The main proxy service. Scramjet is newer but more experimental, while Ultraviolet is older but
                         less advanced.</p>
@@ -1191,7 +1193,7 @@
                 showToast("success", "Custom cursor is now off!", "fas fa-check-circle")
             }
         }
-        
+
         window.addEventListener("beforeunload", function (e) {
             if (localStorage.getItem("cherri_confirmLeave") === "yes") {
                 e.preventDefault()
@@ -1253,6 +1255,39 @@
             getActiveUsers()
         }, 30000)
 
-        
+        function setWisp(i) {
+            if (!i) return
+
+            console.log("Wisp update started")
+
+            if (i === "") {
+                showToast("error", "Wisp cannot be empty!", "fas fa-times-circle")
+                return
+            }
+            console.log("Wisp checks passed (1/4)")
+
+            if (!i.endsWith("/")) {
+                showToast("error", "Wisp server must end with a slash!", "fas fa-times-circle")
+                return
+            }
+            console.log("Wisp checks passed (2/4)")
+
+            if (!i.startsWith("wss://") && !i.startsWith("ws://")) {
+                showToast("error", "Wisp server must start with ws(s)://", "fas fa-times-circle")
+                return
+            }
+            console.log("Wisp checks passed (3/4)")
+
+            if (i.includes(" ")) {
+                showToast("error", "Wisp server must not contain space!", "fas fa-times-circle")
+                return
+            }
+            console.log("Wisp checks passed (4/4)")
+
+            localStorage.setItem("cherri_wispUrl", i)
+            showToast("success", "Wisp server updated! Do<b> ⌘⇧R</b>  to see changes.", "fas fa-check-circle")
+            console.log("Wisp updated", i)
+        }
+
     </script>
 </body>

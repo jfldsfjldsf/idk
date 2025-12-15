@@ -16,7 +16,7 @@
 * [x] Apps
 * [x] Proxy
 * [x] Movies
-* [ ] Chatroom
+* [x] Chatroom
 * [x] Game overlay
 
 ## Deployment
